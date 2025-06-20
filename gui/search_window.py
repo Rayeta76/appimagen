@@ -61,9 +61,11 @@ class SearchWindow(QDialog):
             label.setPixmap(pix)
             label.setScaledContents(True)
             label.setFixedSize(100, 100)
-            label.setSizePolicy(
-                QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed
-            )
+            try:
+                fixed = QSizePolicy.Policy.Fixed
+            except AttributeError:
+                fixed = QSizePolicy.Fixed
+            label.setSizePolicy(fixed, fixed)
             label.setToolTip(f"{rec.title}\n{rec.description}")
             self.grid.addWidget(label, i // 4, i % 4)
 
